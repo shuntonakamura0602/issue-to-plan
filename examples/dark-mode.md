@@ -1,11 +1,3 @@
-# Example: Add Dark Mode
-
-## Input Issue
-
-Add dark mode to settings page
-
-## Generated Implementation Plan
-
 # Implementation Plan
 
 ## Original Issue
@@ -14,65 +6,45 @@ Add dark mode to settings page
 
 ## Goal
 
-Add a dark mode option to the settings page so users can switch between light and dark themes.
+Clarify the goal of this issue and turn it into a small, actionable implementation task.
 
 ## Assumptions
 
-- The project already has a settings page.
-- The project has some existing styling system.
-- The dark mode setting should be easy to find and change.
-- The user's preference should be preserved after refreshing the page.
+- The project already has an existing codebase.
+- The issue can be implemented in small steps.
+- The developer will inspect the relevant files before editing.
 
 ## Steps
 
-1. Find the settings page component.
-2. Check how the project currently handles styles and themes.
-3. Add a dark mode toggle to the settings page.
-4. Store the user's theme preference.
-5. Apply dark mode styles to the application.
-6. Make sure the selected theme persists after reload.
-7. Test both light mode and dark mode manually.
+1. Understand the expected behavior.
+2. Find the relevant files.
+3. Identify the smallest possible code change.
+4. Implement the change.
+5. Add or update tests if needed.
+6. Manually verify the behavior.
+7. Write a concise commit message.
 
 ## Files to Inspect
 
-- Settings page component
-- Global style files
-- Theme configuration files
-- Layout or app root component
-- Existing local storage or user settings logic
+- Relevant components
+- Related tests
+- Configuration files
+- Documentation
 
 ## Questions Before Implementation
 
-- Does the app already support multiple themes?
-- Should the theme preference be stored locally or in the user's account?
-- Should dark mode apply immediately after toggling?
-- Should the system preference be used as the default?
-- Are there existing design tokens or CSS variables?
+- What is the current behavior?
+- What is the expected behavior?
+- Are there edge cases?
+- Is this a bug fix, feature, or refactor?
 
 ## Test Checklist
 
-- The dark mode toggle appears on the settings page.
-- Switching to dark mode updates the UI immediately.
-- Switching back to light mode works.
-- The selected theme remains after refreshing the page.
-- Text remains readable in both themes.
-- Existing settings page behavior is not broken.
+- The main behavior works.
+- Existing behavior is not broken.
+- Error cases are handled.
+- The implementation is simple enough.
 
 ## Suggested Commit Message
 
-Implement dark mode toggle on settings page
-
-## AI Coding Prompt
-
-You are helping me implement this GitHub issue:
-
-"Add dark mode to settings page"
-
-Please inspect the existing settings page, theme-related files, and global styles. Then propose the smallest safe implementation plan before editing code.
-
-Focus on:
-- Finding the existing settings page
-- Understanding the current styling system
-- Adding a simple dark mode toggle
-- Persisting the user's preference
-- Avoiding unnecessary refactors
+Implement: Add dark mode to settings page

@@ -6,8 +6,24 @@ This is useful when you want to start coding with ChatGPT, Claude, or any AI cod
 
 ## Example
 
+## Usage
+
+Generate a plan from a command line argument:
+
 ```bash
-echo "Add dark mode to settings page" | python issue_to_plan.py
+python3 issue_to_plan.py "Add dark mode to settings page"
+```
+
+Generate a plan from stdin:
+
+```bash
+echo "Add dark mode to settings page" | python3 issue_to_plan.py
+```
+
+Write the output to a file:
+
+```bash
+python3 issue_to_plan.py "Add dark mode to settings page" -o examples/dark-mode.md
 ```
 
 ## Output
