@@ -1,0 +1,16 @@
+[project]
+name = "issue-to-plan"
+version = "0.1.0"
+description = "A tiny CLI that turns rough GitHub issues into implementation plan markdown."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Shunto" }
+]
+
+[project.scripts]
+issue-to-plan = "issue_to_plan:main"
+
+[tool.setuptools]
+py-modules = ["issue_to_plan"]
