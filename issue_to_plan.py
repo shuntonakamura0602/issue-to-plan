@@ -1,0 +1,73 @@
+import sys
+
+
+def generate_plan(issue: str) -> str:
+    issue = issue.strip()
+
+    return f"""# Implementation Plan
+
+## Original Issue
+
+{issue}
+
+## Goal
+
+Clarify the goal of this issue and turn it into a small, actionable implementation task.
+
+## Assumptions
+
+- The project already has an existing codebase.
+- The issue can be implemented in small steps.
+- The developer will inspect the relevant files before editing.
+
+## Steps
+
+1. Understand the expected behavior.
+2. Find the relevant files.
+3. Identify the smallest possible code change.
+4. Implement the change.
+5. Add or update tests if needed.
+6. Manually verify the behavior.
+7. Write a concise commit message.
+
+## Files to Inspect
+
+- Relevant components
+- Related tests
+- Configuration files
+- Documentation
+
+## Questions Before Implementation
+
+- What is the current behavior?
+- What is the expected behavior?
+- Are there edge cases?
+- Is this a bug fix, feature, or refactor?
+
+## Test Checklist
+
+- The main behavior works.
+- Existing behavior is not broken.
+- Error cases are handled.
+- The implementation is simple enough.
+
+## Suggested Commit Message
+
+Implement: {issue[:60]}
+"""
+
+
+def main() -> None:
+    issue = sys.stdin.read()
+
+    if not issue.strip():
+        print("Please provide an issue description via stdin.")
+        print("Example:")
+        print('  echo "Add dark mode to settings page" | python issue_to_plan.py')
+        return
+
+    print(generate_plan(issue))
+
+
+if __name__ == "__main__":
+    main()
