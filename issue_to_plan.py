@@ -1,3 +1,5 @@
+import argparse
+from pathlib import Path
 import sys
 
 
@@ -58,15 +60,45 @@ Implement: {issue[:60]}
 
 
 def main() -> None:
-    issue = sys.stdin.read()
+    parser = argparse.ArgumentParser(
+        description="Turn a rough GitHub issue into an implementation plan markdown."
+    )
+
+    parser.add_argument(
+        "issue",
+        nargs="*",
+        help="Issue description. If omitted, input is read from stdin.",
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="Write the generated plan to a file.",
+    )
+
+    args = parser.parse_args()
+
+    if args.issue:
+        issue = " ".join(args.issue)
+    else:
+        issue = sys.stdin.read()
 
     if not issue.strip():
-        print("Please provide an issue description via stdin.")
-        print("Example:")
-        print('  echo "Add dark mode to settings page" | python issue_to_plan.py')
+        print("Please provide an issue description.")
+        print()
+        print("Examples:")
+        print('  python3 issue_to_plan.py "Add dark mode to settings page"')
+        print('  echo "Add dark mode to settings page" | python3 issue_to_plan.py')
         return
 
-    print(generate_plan(issue))
+    plan = generate_plan(issue)
+
+    if args.output:
+        output_path = Path(args.output)
+        output_path.write_text(plan, encoding="utf-8")
+        print(f"Plan written to {output_path}")
+    else:
+        print(plan)
 
 
 if __name__ == "__main__":
