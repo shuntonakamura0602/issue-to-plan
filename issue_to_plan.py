@@ -60,6 +60,45 @@ Implement: {issue[:60]}
 """
 
 
+def generate_ai_prompt(issue: str) -> str:
+    issue = issue.strip()
+
+    return f"""Act as an experienced software engineer.
+
+Turn the following issue into a concrete implementation plan:
+
+> {issue}
+
+Please return the result in Markdown and include:
+
+## Goal
+
+Clarify the goal in practical engineering terms.
+
+## Assumptions
+
+List reasonable assumptions, and call out anything that needs confirmation.
+
+## Files to Inspect
+
+Identify likely files, directories, tests, configuration, and documentation to inspect before editing.
+
+## Implementation Steps
+
+Break the work into small, ordered steps.
+
+## Test Checklist
+
+Suggest focused automated and manual checks for the change.
+
+## Constraints
+
+- Avoid unnecessary refactoring.
+- Prefer the smallest clear change that satisfies the issue.
+- Preserve existing behavior unless the issue requires changing it.
+"""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Turn a rough GitHub issue into an implementation plan markdown."
@@ -77,6 +116,12 @@ def main() -> None:
         help="Write the generated plan to a file.",
     )
 
+    parser.add_argument(
+        "--ai-prompt",
+        action="store_true",
+        help="Generate a pasteable prompt for an AI coding assistant.",
+    )
+
     args = parser.parse_args()
 
     if args.issue:
@@ -92,14 +137,17 @@ def main() -> None:
         print('  echo "Add dark mode to settings page" | python3 issue_to_plan.py')
         return
 
-    plan = generate_plan(issue)
+    result = generate_ai_prompt(issue) if args.ai_prompt else generate_plan(issue)
 
     if args.output:
         output_path = Path(args.output)
-        output_path.write_text(plan, encoding="utf-8")
-        print(f"Plan written to {output_path}")
+        output_path.write_text(result, encoding="utf-8")
+        if args.ai_prompt:
+            print(f"Prompt written to {output_path}")
+        else:
+            print(f"Plan written to {output_path}")
     else:
-        print(plan)
+        print(result)
 
 
 if __name__ == "__main__":
