@@ -1,8 +1,10 @@
 # issue-to-plan
 
-A tiny CLI that turns rough GitHub issues into implementation plan markdown.
+`issue-to-plan` turns vague GitHub issue text into a structured implementation plan you can start from immediately.
 
-This is useful when you want to start coding with ChatGPT, Claude, or any AI coding assistant, but your issue is still too vague.
+It is a small Python CLI for converting rough ideas like "Add dark mode to settings page" into Markdown with a goal, assumptions, implementation steps, files to inspect, questions, tests, and a suggested commit message.
+
+Use normal mode when you want a planning document for yourself. Use `--ai-prompt` when you want a copy-pasteable prompt for AI coding tools such as ChatGPT, Claude, Cursor, Claude Code, or GitHub Copilot.
 
 ## Usage
 
@@ -10,6 +12,12 @@ Generate a plan from a command line argument:
 
 ```bash
 python3 issue_to_plan.py "Add dark mode to settings page"
+```
+
+If installed as a package, use the CLI command:
+
+```bash
+issue-to-plan "Add dark mode to settings page"
 ```
 
 Generate a plan from stdin:
@@ -36,9 +44,9 @@ Write an AI prompt to a file:
 python3 issue_to_plan.py "Add dark mode to settings page" --ai-prompt -o examples/dark-mode-ai-prompt.md
 ```
 
-## Output
+## Modes
 
-Normal mode generates:
+Normal mode generates an implementation plan for the issue:
 
 - Goal
 - Assumptions
@@ -48,7 +56,7 @@ Normal mode generates:
 - Test checklist
 - Suggested commit message
 
-`--ai-prompt` mode generates a prompt you can paste into ChatGPT, Claude, Cursor, Claude Code, or another coding assistant. The prompt asks the assistant to:
+`--ai-prompt` mode generates a prompt you can paste into an AI coding assistant. The prompt asks the assistant to:
 
 - Act as an experienced software engineer
 - Clarify the goal
@@ -58,6 +66,10 @@ Normal mode generates:
 - Suggest a test checklist
 - Avoid unnecessary refactoring
 - Return the result in Markdown
+
+## Limitations
+
+`issue-to-plan` does not call an AI API yet. It currently generates structured templates and AI-ready prompts from the issue text you provide.
 
 ## Why
 
