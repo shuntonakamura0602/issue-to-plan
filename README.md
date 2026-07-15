@@ -44,6 +44,15 @@ Write an AI prompt to a file:
 python3 issue_to_plan.py "Add dark mode to settings page" --ai-prompt -o examples/dark-mode-ai-prompt.md
 ```
 
+## Examples
+
+- [Add dark mode](examples/dark-mode.md)
+- [Add dark mode AI prompt](examples/dark-mode-ai-prompt.md)
+- [Fix a login redirect bug](examples/login-redirect-bug.md)
+- [Fix a login redirect bug AI prompt](examples/login-redirect-bug-ai-prompt.md)
+- [Refactor a profile card component](examples/refactor-profile-card.md)
+- [Add a password reset test case](examples/add-password-reset-test.md)
+
 ## Modes
 
 Normal mode generates an implementation plan for the issue:
