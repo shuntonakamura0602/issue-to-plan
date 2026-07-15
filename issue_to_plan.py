@@ -4,6 +4,9 @@ from pathlib import Path
 import sys
 
 
+VERSION = "0.1.0"
+
+
 def generate_plan(issue: str) -> str:
     issue = issue.strip()
 
@@ -120,6 +123,12 @@ def main() -> None:
         "--ai-prompt",
         action="store_true",
         help="Generate a pasteable prompt for an AI coding assistant.",
+    )
+
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"issue-to-plan {VERSION}",
     )
 
     args = parser.parse_args()

@@ -44,6 +44,12 @@ Write an AI prompt to a file:
 python3 issue_to_plan.py "Add dark mode to settings page" --ai-prompt -o examples/dark-mode-ai-prompt.md
 ```
 
+Show the installed version:
+
+```bash
+python3 issue_to_plan.py --version
+```
+
 ## Examples
 
 - [Add dark mode](examples/dark-mode.md)
