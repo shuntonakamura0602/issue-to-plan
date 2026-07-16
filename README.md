@@ -1,41 +1,96 @@
 # issue-to-plan
 
-`issue-to-plan` turns vague GitHub issue text into a structured implementation plan you can start from immediately.
+`issue-to-plan` turns a rough GitHub issue or development task into a structured implementation plan or an AI-ready coding prompt.
 
-It is a small Python CLI for converting rough ideas like "Add dark mode to settings page" into Markdown with a goal, assumptions, implementation steps, files to inspect, questions, tests, and a suggested commit message.
+## Why this project exists
 
-Use normal mode when you want a planning document for yourself. Use `--ai-prompt` when you want a copy-pasteable prompt for AI coding tools such as ChatGPT, Claude, Cursor, Claude Code, or GitHub Copilot.
+Starting from a vague issue can be slow. This small Python CLI gives you a concrete first draft: either a human-readable plan template you can work from, or a prompt you can paste into a coding assistant.
+
+## Features
+
+- Generate a structured implementation-plan template for humans.
+- Generate an AI-ready prompt for coding tools.
+- Read issue text from command-line arguments or stdin.
+- Write generated output to a file.
+- Run with Python's standard library only.
+
+## Installation
+
+No external dependencies are required. The most reliable way to try the project is to run the script directly from a local checkout:
+
+```bash
+cd issue-to-plan
+python3 issue_to_plan.py --version
+```
+
+The repository includes Python packaging metadata, but this README does not assume a PyPI release.
 
 ## Usage
 
-Generate a plan from a command line argument:
+Pass the issue or task text as an argument:
 
 ```bash
 python3 issue_to_plan.py "Add dark mode to settings page"
 ```
 
-If installed as a package, use the CLI command:
-
-```bash
-issue-to-plan "Add dark mode to settings page"
-```
-
-Generate a plan from stdin:
+Or pipe the issue text through stdin:
 
 ```bash
 echo "Add dark mode to settings page" | python3 issue_to_plan.py
 ```
 
-Generate a pasteable AI prompt:
+Write output to a file:
+
+```bash
+python3 issue_to_plan.py "Add dark mode to settings page" -o examples/dark-mode.md
+```
+
+Show the current version:
+
+```bash
+python3 issue_to_plan.py --version
+```
+
+## Normal mode
+
+Normal mode generates a human-readable implementation-plan template:
+
+```bash
+python3 issue_to_plan.py "Add dark mode to settings page"
+```
+
+Short output example:
+
+```markdown
+# Implementation Plan
+
+## Original Issue
+
+Add dark mode to settings page
+
+## Goal
+
+Clarify the goal of this issue and turn it into a small, actionable implementation task.
+```
+
+See [examples/dark-mode.md](examples/dark-mode.md) and [examples/login-redirect-bug.md](examples/login-redirect-bug.md) for complete examples.
+
+## AI prompt mode
+
+`--ai-prompt` generates instructions that can be pasted into coding tools such as ChatGPT, Claude, Cursor, Claude Code, Codex, or GitHub Copilot:
 
 ```bash
 python3 issue_to_plan.py "Add dark mode to settings page" --ai-prompt
 ```
 
-Write the output to a file:
+Short output example:
 
-```bash
-python3 issue_to_plan.py "Add dark mode to settings page" -o examples/dark-mode.md
+```markdown
+Act as an experienced software engineer.
+
+Turn the following issue into a concrete implementation plan:
+
+> Add dark mode to settings page
 ```
 
 Write an AI prompt to a file:
@@ -44,19 +99,11 @@ Write an AI prompt to a file:
 python3 issue_to_plan.py "Add dark mode to settings page" --ai-prompt -o examples/dark-mode-ai-prompt.md
 ```
 
-Show the installed version:
-
-```bash
-python3 issue_to_plan.py --version
-```
-
-Run the tests:
-
-```bash
-python3 -m unittest discover -s tests
-```
+See [examples/dark-mode-ai-prompt.md](examples/dark-mode-ai-prompt.md) and [examples/login-redirect-bug-ai-prompt.md](examples/login-redirect-bug-ai-prompt.md) for complete examples.
 
 ## Examples
+
+Existing generated examples:
 
 - [Add dark mode](examples/dark-mode.md)
 - [Add dark mode AI prompt](examples/dark-mode-ai-prompt.md)
@@ -65,43 +112,20 @@ python3 -m unittest discover -s tests
 - [Refactor a profile card component](examples/refactor-profile-card.md)
 - [Add a password reset test case](examples/add-password-reset-test.md)
 
-## Modes
+## Running tests
 
-Normal mode generates an implementation plan for the issue:
-
-- Goal
-- Assumptions
-- Implementation steps
-- Files to inspect
-- Questions before implementation
-- Test checklist
-- Suggested commit message
-
-`--ai-prompt` mode generates a prompt you can paste into an AI coding assistant. The prompt asks the assistant to:
-
-- Act as an experienced software engineer
-- Clarify the goal
-- List assumptions
-- Identify files to inspect
-- Break the work into small steps
-- Suggest a test checklist
-- Avoid unnecessary refactoring
-- Return the result in Markdown
+```bash
+python3 -m unittest discover -s tests
+```
 
 ## Limitations
 
-`issue-to-plan` does not call an AI API yet. It currently generates structured templates and AI-ready prompts from the issue text you provide.
+`issue-to-plan` does not call an AI API and is not AI-powered. It currently generates deterministic templates and AI-ready prompts from the issue text you provide.
 
-## Why
+The tool does not automatically analyze repository context, inspect your codebase, fetch GitHub issue URLs, or read linked issue metadata.
 
-Starting is often the hardest part of development.
+## Feedback
 
-This tool helps convert vague tasks into a concrete first step.
+Please open a GitHub Issue for bug reports, feature requests, installation problems, and workflow feedback.
 
-## Roadmap
-
-- [ ] Support GitHub issue URLs
-- [ ] Add custom templates
-- [ ] Generate PR descriptions
-- [x] Generate AI coding prompts
-- [ ] Add npm package version
+Feedback is especially useful on whether this tool is more helpful than pasting an issue directly into an LLM.
