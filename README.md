@@ -50,6 +50,12 @@ Show the installed version:
 python3 issue_to_plan.py --version
 ```
 
+Run the tests:
+
+```bash
+python3 -m unittest discover -s tests
+```
+
 ## Examples
 
 - [Add dark mode](examples/dark-mode.md)
